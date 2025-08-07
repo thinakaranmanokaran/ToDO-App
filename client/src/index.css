@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: SFProRegular;
+    src: url(assets/fonts/general/GeneralSans-Regular.otf);
+}
+
+@font-face {
+    font-family: SFProBold;
+    src: url(assets/fonts/general/GeneralSans-Semibold.otf);
+}
+
+@theme{
+    --color-primary: #AA14F0;
+    --color-secondary: #BC8CF2;
+    --color-dark: #0C0C0C;
+    /* --color-light: #f4f4f4; */
+    --color-light: #EEEEEE;
+
+    --font-primary: SFProBold, sans-serif;
+    --font-secondary:  SFProRegular , sans-serif;
+}
