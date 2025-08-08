@@ -57,25 +57,37 @@ function Home() {
                 </div>
 
                 {/* Todo List */}
-                <ul className="mt-8 space-y-4">
+                <motion.ul
+                    className="mt-8 space-y-4"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: { staggerChildren: 0.1 } // delay between items
+                        }
+                    }}
+                >
                     <AnimatePresence>
                         {todos.map((todo) => (
                             <motion.li
                                 key={todo.id}
-                                initial={{ opacity: 0, y: 0 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.5 }}
-                                className="flex justify-between items-center bg-secondary text-dark font-secondary px-10 pl-6 min-h-20 text-xl relative group cursor-pointer  shadow transition-all duration-300 hover:shadow-lg"
+                                variants={{
+                                    hidden: { opacity: 0, y: 50 },
+                                    visible: { opacity: 1, y: 0 }
+                                }}
+                                exit={{ opacity: 0, y: 50 }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                className="flex justify-between items-center bg-secondary text-dark font-secondary px-10 pl-6 min-h-20 text-xl relative group cursor-pointer  shadow transition-all duration-300 hover:shadow-lg" onClick={() => toggleTodo(todo.id, todo.completed)}
                             >
                                 <div
                                     className="flex items-center gap-4 transition-all duration-300"
-                                    onClick={() => toggleTodo(todo.id, todo.completed)}
+                                    
                                 >
                                     <motion.div
                                         className={`w-8 h-8 text-2xl border flex justify-center items-center  transition-colors duration-300 ${todo.completed
-                                                ? "bg-dark text-white border-none rounded-full"
-                                                : "border-dark group-hover:bg-dark transition-all duration-300 group-hover:rounded-full group-hover:text-white"
+                                            ? "bg-dark text-white border-none rounded-full"
+                                            : "border-dark group-hover:bg-dark transition-all duration-300 group-hover:rounded-full group-hover:text-white"
                                             }`}
                                         animate={{ scale: todo.completed ? 1.2 : 1 }}
                                         transition={{ type: "spring", stiffness: 300 }}
@@ -85,8 +97,8 @@ function Home() {
 
                                     <span
                                         className={`flex-1 transition-all duration-300 ${todo.completed
-                                                ? "line-through text-gray-600"
-                                                : "text-dark"
+                                            ? "line-through text-gray-600"
+                                            : "text-dark"
                                             }`}
                                     >
                                         {todo.title}
@@ -102,7 +114,7 @@ function Home() {
                             </motion.li>
                         ))}
                     </AnimatePresence>
-                </ul>
+                </motion.ul>
             </div>
         </div>
     );
